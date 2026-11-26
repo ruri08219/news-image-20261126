@@ -27,6 +27,14 @@ make.fun's "Sum up 26 November's world news in one image" bounty ($100 in USDC).
 
 Every story on the page happened, or was first reported, on 26 November 2026.
 
+## Verification
+
+To confirm the entry image is intact:
+
+1. Run `python3 main.py` — it verifies `entry.png` before copying it.
+2. Check the output copy's SHA-256 equals `d6a26384b404e28eaa44b1ad2e557821a3eb133517cb70c72d0f608c3562e542`.
+3. The image is 1024x1024 and 168548 bytes; a size or hash mismatch stops the script with an error and a non-zero exit code.
+
 ## Run it
 
 ```sh
