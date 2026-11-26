@@ -6,7 +6,8 @@ date-checked stories from 26 November 2026. This script does one
 small job: it checks the bundled image against its known size and
 SHA-256 fingerprint, then places a verified copy where the harness
 expects it (``$MAKEFUN_OUTPUT_DIR/entry.png``, or ``out/entry.png``
-when that variable is not set).
+when that variable is not set). Pass ``--verify-only`` to check the
+image without writing a copy.
 
 Only the Python standard library is used.
 """
@@ -71,6 +72,9 @@ def resolve_destination():
 def main():
     here = Path(__file__).resolve().parent
     payload, digest = load_checked_image(here / IMAGE_NAME)
+    if "--verify-only" in sys.argv[1:]:
+        print(f"ok: {IMAGE_NAME} verified ({len(payload)} bytes, sha256 {digest})")
+        return 0
     target = place_verified_copy(payload, resolve_destination())
     print(f"ok: wrote {target} ({len(payload)} bytes, sha256 {digest})")
     return 0
